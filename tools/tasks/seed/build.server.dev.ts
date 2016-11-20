@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
-import { join } from 'path';
+import { join, sep, relative } from 'path';
 
 import Config from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
@@ -58,6 +58,11 @@ export = () => {
 
   return result.js
     .pipe(plugins.sourcemaps.write())
+          //  .pipe(plugins.sourcemaps.write('.', {
+          //    includeContent: false,
+          //    sourceRoot: (file: any) =>
+          //       relative(Config.APP_SERVER_DEST, Config.PROJECT_ROOT) + '/' + Config.APP_SERVER_SRC
+          //  }))
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(Config.APP_SERVER_DEST));
 };
