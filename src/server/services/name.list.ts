@@ -25,7 +25,7 @@ export function nameList(app: express.Application) {
           if (err) {
               res.json({info: 'error during find Users', error: err});
           };
-          res.json({info: 'Users found successfully', data: users});
+          res.json({info: 'Users found successfully', data: users.map((x : any) => x._doc)});
       });
     });
 
@@ -37,18 +37,10 @@ export function nameList(app: express.Application) {
     (req:any, res:any, next:any) => {
       var newUser = new user(req.body);
       newUser.save((err : any) => {
-          if (err){
+          if (err) {
               res.json({info: 'error during User create', error: err});
           }
           res.json({info: 'User saved successfully', data: newUser});
       });
     });
-
-  /**
-   * Delete name.
-   * @database
-   */
-  // app.delete('/api/name-list',
-  //   (req:any, res:any, next:any) => { } );
-
 }

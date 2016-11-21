@@ -6,7 +6,7 @@
       "type": "chrome",
       "preLaunchTask": "start",
       "request": "launch",
-      "url": "http://localhost:5555",
+      "url": "http://localhost:9001",
       "sourceMaps": true,
       "webRoot": "${workspaceRoot}/src/client",
       "sourceMapPathOverrides": {

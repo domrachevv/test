@@ -10,6 +10,7 @@
       {
           "taskName": "start",
           "args": [
+            "--port=9001",
              "start"
           ]
       },

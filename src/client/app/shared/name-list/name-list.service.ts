@@ -16,7 +16,7 @@ export class NameListService {
   get(): Observable<string[]> {
     return this.http.get(`${Config.API}/api/name-list`)
       .map((res: Response) => res.json())
-      .map((i: any) => i.first_name)
+      .map((res: any) => res.data)
       .catch(this.handleError);
   }
 

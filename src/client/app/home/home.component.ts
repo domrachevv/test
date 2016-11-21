@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   getNames() {
     this.nameListService.get()
       .subscribe(
-        names => this.names = names,
+        data => this.names = data,
         error =>  this.errorMessage = <any>error
       );
   }
@@ -48,8 +48,11 @@ export class HomeComponent implements OnInit {
    * @return {boolean} false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
-    this.nameListService.post(this.newName);
-    this.names.push(this.newName);
+    this.nameListService.post(this.newName)
+      .subscribe(x => {
+        this.getNames();
+      });
+
     this.newName = '';
     return false;
   }
