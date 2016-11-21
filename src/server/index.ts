@@ -1,3 +1,5 @@
+/// <reference path="../../typings/index.d.ts" />
+
 import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
@@ -5,7 +7,7 @@ import * as path from 'path';
 import * as compression from 'compression';
 import * as routes from './routes';
 
-import { Init } from './db/redis';
+import { Init } from './db/mongo';
 
 var _clientDir = '../client';
 var app = express();

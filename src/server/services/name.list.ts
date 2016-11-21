@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as redis from 'redis';
+import * as user from '../db/entity/user';
 
 let nameData = require('../data/name.list.json');
 
@@ -21,20 +21,12 @@ export function nameList(app: express.Application) {
    */
   app.get('/api/name-list',
     (req:any, res:any, next:any) => {
-
-      let RedisClient = redis.createClient(),
-          nameList: string[] = [];
-
-      RedisClient.smembers('name-list',
-        (err:any, replies:any) => {
-          console.log(`
-          Reply length: ${replies.length}. 
-          Reply: ${replies}.`);
-          nameList = replies;
-          res.json(nameList);
+      user.find((err: any, users: any) => {
+          if (err) {
+              res.json({info: 'error during find Users', error: err});
+          };
+          res.json({info: 'Users found successfully', data: users});
       });
-
-      RedisClient.quit();
     });
 
   /**
@@ -43,43 +35,20 @@ export function nameList(app: express.Application) {
    */
   app.post('/api/name-list',
     (req:any, res:any, next:any) => {
-
-      let RedisClient = redis.createClient(),
-          request = req.body;
-          // request = JSON.parse(req.body);
-
-      RedisClient.sadd('name-list', request.name,
-        (err:any, replies:any) => {
-          console.log(`
-          Reply: ${replies}.`);
-
-          res.json({success: true});
-        });
-
-      RedisClient.quit();
+      var newUser = new user(req.body);
+      newUser.save((err : any) => {
+          if (err){
+              res.json({info: 'error during User create', error: err});
+          }
+          res.json({info: 'User saved successfully', data: newUser});
+      });
     });
 
   /**
    * Delete name.
    * @database
    */
-  app.delete('/api/name-list',
-    (req:any, res:any, next:any) => {
-
-      let RedisClient = redis.createClient(),
-          request = req.body;
-          // request = JSON.parse(req.body);
-
-      RedisClient.srem('name-list', request.name,
-        (err:any, replies:any) => {
-          console.log(`
-          Reply length: ${replies.length}. 
-          Reply: ${replies}.`);
-
-          res.json({success: true});
-        });
-
-      RedisClient.quit();
-    });
+  // app.delete('/api/name-list',
+  //   (req:any, res:any, next:any) => { } );
 
 }

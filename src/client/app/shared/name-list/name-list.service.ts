@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Config } from '../index';
 
 import 'rxjs/add/observable/throw';
-// import 'rxjs/add/operator/do';  // for debugging
 
 /**
  * This class provides the NameList service with methods to read names and add names.
@@ -12,27 +11,22 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class NameListService {
 
-  /**
-   * Creates a new NameListService with the injected Http.
-   * @param {Http} http - The injected Http.
-   * @constructor
-   */
   constructor(private http: Http) {}
 
-  /**
-   * Returns an Observable for the HTTP GET request for the JSON resource.
-   * @return {string[]} The Observable for the HTTP request.
-   */
   get(): Observable<string[]> {
-    return this.http.get(`${Config.API}/api/name-list/static`)
+    return this.http.get(`${Config.API}/api/name-list`)
       .map((res: Response) => res.json())
-    //              .do(data => console.log('server data:', data))  // debug
-                    .catch(this.handleError);
+      .map((i: any) => i.first_name)
+      .catch(this.handleError);
   }
 
-  /**
-    * Handle HTTP error
-    */
+  post(name: string) {
+    return this.http.post(`${Config.API}/api/name-list`, {
+      first_name: name
+    })
+    .catch(this.handleError);
+  }
+
   private handleError (error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message

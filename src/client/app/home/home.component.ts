@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
    * @return {boolean} false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
-    // TODO: implement nameListService.post
+    this.nameListService.post(this.newName);
     this.names.push(this.newName);
     this.newName = '';
     return false;
