@@ -1,22 +1,41 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "command": "npm",
-    "isShellCommand": true,
-    "showOutput": "always",
-    "suppressTaskName": true,
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "0.1.0",
+  "command": "npm",
+  "isShellCommand": true,
+  "showOutput": "always",
+  "suppressTaskName": true,
   "tasks": [
-      {
-          "taskName": "start",
-          "args": [
-            "--port=9001",
-             "start"
-          ]
-      },
+    {
+      "taskName": "start",
+      "args": [
+        "--port=9001",
+        "start"
+      ]
+    },
+    {
+      "taskName": "start.deving",
+      "args": [
+        "run",
+        "start.deving"
+      ]
+    },
+    {
+      "taskName": "build.dev",
+      "args": [
+        "run",
+        "build.dev"
+      ]
+    },
     {
       "taskName": "tslint",
-      "args": [ "run", "gulp", "tslint", "--color" ],
+      "args": [
+        "run",
+        "gulp",
+        "tslint",
+        "--color"
+      ],
       "problemMatcher": {
         "owner": "tslint",
         "fileLocation": [

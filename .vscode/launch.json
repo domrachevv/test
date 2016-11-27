@@ -14,12 +14,17 @@
       }
     },
     {
-      "name": "Debug nodejs",
+      "name": "Start server debug",
       "type": "node",
       "request": "launch",
+      "preLaunchTask": "build.dev",
+//      "runtimeExecutable": "npm.cmd",
       "program": "${workspaceRoot}/app.server.dev.js",
-      "sourceMaps": true,
-      "outDir": "${workspaceRoot}/dist/dev",
+//      "runtimeArgs": [
+//        "run-script",
+//        "start.deving"
+//      ],
+//      "port": 5858,
       "cwd": "${workspaceRoot}"
     },
     {

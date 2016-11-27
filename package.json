@@ -29,7 +29,7 @@
     "serve.prod": "gulp serve.prod --color --env-config prod",
     "serve.prod.exp": "gulp serve.prod.exp --color --env-config prod",
     "start": "gulp serve.dev --color",
-    "start.deving": "gulp start.deving --color",
+    "start.deving": "gulp serve.dev --nolazy --debug-brk=5858 --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",

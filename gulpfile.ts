@@ -13,8 +13,8 @@ loadTasks(Config.PROJECT_TASKS_DIR);
 // --------------
 // Build dev.
 gulp.task('build.dev', (done: any) =>
-  runSequence(//'clean.dev',
-//              'tslint',
+  runSequence('clean.dev',
+              //'tslint',
               'build.assets.dev',
               'build.html_css',
               'build.js.dev',
