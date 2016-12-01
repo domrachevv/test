@@ -2,17 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Start server debug",
+      "name": "Start server debug (fast)",
       "type": "node",
       "request": "launch",
       "preLaunchTask": "build.dev",
-//      "runtimeExecutable": "npm.cmd",
       "program": "${workspaceRoot}/app.server.dev.js",
-//      "runtimeArgs": [
-//        "run-script",
-//        "start.deving"
-//      ],
-//      "port": 5858,
+      "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": "Start server debug (full)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "build.dev_full",
+      "program": "${workspaceRoot}/app.server.dev.js",
       "cwd": "${workspaceRoot}"
     },
     {

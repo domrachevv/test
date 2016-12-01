@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",
+    "build.dev_full": "gulp build.dev --color --env-config dev --scss=true",
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.e2e": "gulp build.e2e --color",
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
