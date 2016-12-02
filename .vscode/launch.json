@@ -2,18 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Start server debug (fast)",
-      "type": "node",
-      "request": "launch",
-      "preLaunchTask": "build.dev",
-      "program": "${workspaceRoot}/app.server.dev.js",
-      "cwd": "${workspaceRoot}"
-    },
-    {
       "name": "Start server debug (full)",
       "type": "node",
       "request": "launch",
       "preLaunchTask": "build.dev_full",
+      "program": "${workspaceRoot}/app.server.dev.js",
+      "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": "Start server debug (fast)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "build.dev",
       "program": "${workspaceRoot}/app.server.dev.js",
       "cwd": "${workspaceRoot}"
     },
