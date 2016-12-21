@@ -22,6 +22,19 @@ export function init(port: number, mode: string) {
   // DB Init
   Init();
 
+  app.use(express.static(path.resolve(process.cwd(), 'demo')));
+  app.get(/^\/demo\/([a-zA-Z0-9/]+$)/, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    let webLinkIndex = '/' + req.params[0] + '/demo/mbc/index.html';
+    let relativePath = '/demo' + webLinkIndex;
+    let indexPath = path.resolve(process.cwd(), '.' + relativePath);
+    if (fs.existsSync(indexPath)) {
+      res.redirect(webLinkIndex);
+    }
+    else {
+      next();
+    }
+  });
+
   /**
    * Dev Mode.
    * @note Dev server will only give for you middleware.
@@ -40,14 +53,10 @@ export function init(port: number, mode: string) {
     app.use(express.static(root));
     app.use(express.static(clientRoot));
 
-    var renderIndex = (req: express.Request, res: express.Response) => {
+    let renderIndex = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
     app.get('/*', renderIndex);
-
-    /**
-     * Api Routes for `Development`.
-     */
   }
   else {
     /**
@@ -64,6 +73,11 @@ export function init(port: number, mode: string) {
      */
     app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
     app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
+
+    console.log("__dirname = " + __dirname);
+    console.log("_clientDir = " + _clientDir);
+    console.log("resolved = " + path.resolve(__dirname, _clientDir + '/js'));
+
     app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
 
     /**
@@ -71,7 +85,7 @@ export function init(port: number, mode: string) {
      * @param req {any}
      * @param res {any}
      */
-    var renderIndex = function (req: express.Request, res: express.Response) {
+    let renderIndex = function (req: express.Request, res: express.Response) {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
 

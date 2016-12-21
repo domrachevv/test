@@ -10,7 +10,7 @@
     "build.dev_full": "gulp build.dev_full --color --env-config dev --scss=true",
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.e2e": "gulp build.e2e --color",
-    "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
+    "build.prod": "gulp build.prod --color --env-config prod --build-type prod --scss=true",
     "build.prod.exp": "gulp build.prod.exp --color --env-config prod --build-type prod",
     "build.test": "gulp build.test --color",
     "test.watch": "gulp test.watch --color",

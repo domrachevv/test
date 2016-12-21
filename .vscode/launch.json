@@ -25,6 +25,14 @@
       "cwd": "${workspaceRoot}"
     },
     {
+      "name": "Start server debug (prod)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "build.prod",
+      "program": "${workspaceRoot}/app.server.prod.js",
+      "cwd": "${workspaceRoot}"
+    },
+    {
       "name": "Launch Chrome against localhost, with sourcemaps",
       "type": "chrome",
       "request": "launch",

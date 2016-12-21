@@ -29,6 +29,13 @@
       ]
     },
     {
+      "taskName": "build.prod",
+      "args": [
+        "run",
+        "build.prod"
+      ]
+    },
+    {
       "taskName": "tslint",
       "args": [
         "run",

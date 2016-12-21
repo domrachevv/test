@@ -393,11 +393,20 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/*': '/app/*',
+      'routing/': '/routing/routes',
+      'npm:': 'node_modules/',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
     packages: {
+      primeng: {
+          defaultExtension: 'js'
+      }/*,
+      'lodash': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      }*/
     }
   };
 
@@ -423,9 +432,19 @@ export class SeedConfig {
       // Note that for multiple apps this configuration need to be updated
       // You will have to include entries for each individual application in
       // `src/client`.
-      [join(this.TMP_CLIENT_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`,
+      /*[join(this.TMP_CLIENT_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`,*/
+
+      [`${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`.replace(/\//g, '\\')]: `${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`,
+      [`${this.TMP_CLIENT_DIR}/*`]: `${this.TMP_CLIENT_DIR}/*`,
+      [`${this.TMP_CLIENT_DIR}/*`.replace(/\//g, '\\')]: `${this.TMP_CLIENT_DIR}/*`,
+
+      /*'dist\\tmp_client\\app\\*': 'dist/tmp_client/app/*', 
+      'dist/tmp_client/*': 'dist/tmp_client/*',
+      'dist\\tmp_client\\*': 'dist/tmp_client/*',*/
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
+      //'dist\\tmp_client\\node_modules\\*': 'dist/tmp_client/node_modules/*',
       'node_modules/*': 'node_modules/*',
+      //'node_modules\\*': 'node_modules/*',
       '*': 'node_modules/*'
     },
     packages: {
