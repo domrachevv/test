@@ -14,10 +14,18 @@ var app = express();
 
 export function init(port: number, mode: string) {
 
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+  app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.text());
   app.use(compression());
+
+  /* NOTE: This disables caching */
+  app.all("/api/*", function noCache(req, res, next) {
+      res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.header("Pragma", "no-cache");
+      res.header("Expires", "0");
+      next();
+  });
 
   // DB Init
   Init();
@@ -49,9 +57,8 @@ export function init(port: number, mode: string) {
     routes.init(app);
 
     let root = path.resolve(process.cwd());
-    let clientRoot = path.resolve(process.cwd(), './dist/dev/client');
     app.use(express.static(root));
-    app.use(express.static(clientRoot));
+    app.use(express.static(_clientDir));
 
     let renderIndex = (req: express.Request, res: express.Response, next: express.NextFunction) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
@@ -73,11 +80,6 @@ export function init(port: number, mode: string) {
      */
     app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
     app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
-
-    console.log("__dirname = " + __dirname);
-    console.log("_clientDir = " + _clientDir);
-    console.log("resolved = " + path.resolve(__dirname, _clientDir + '/js'));
-
     app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
 
     /**

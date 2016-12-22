@@ -33,6 +33,13 @@
       "cwd": "${workspaceRoot}"
     },
     {
+      "name": "Start server debug (prod no rebuild)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/app.server.prod.js",
+      "cwd": "${workspaceRoot}"
+    },
+    {
       "name": "Launch Chrome against localhost, with sourcemaps",
       "type": "chrome",
       "request": "launch",
