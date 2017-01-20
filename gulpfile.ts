@@ -145,7 +145,7 @@ gulp.task('serve.e2e', (done: any) =>
 // Serve prod
 gulp.task('serve.prod', (done: any) =>
   runSequence('build.prod',
-              'server.prod',
+              'start.server.prod',
               done));
 
 

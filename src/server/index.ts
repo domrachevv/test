@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as compression from 'compression';
 import * as routes from './routes';
+import Config from './config/server.config';
 
 import { Init } from './db/mongo';
 
@@ -14,6 +15,13 @@ let app = express();
 let logger = require('morgan');
 
 export function init(port: number, mode: string) {
+  if(port == null) {
+    port = Config.PORT;
+  }
+
+  if(mode == null) {
+    mode = Config.BUILD_TYPE;
+  }
 
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
   app.use(bodyParser.json({ limit: '50mb' }));
