@@ -1,5 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
-
 import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';

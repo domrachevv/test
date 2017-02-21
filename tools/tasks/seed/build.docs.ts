@@ -13,7 +13,6 @@
 // export = () => {
 //
 //   let src = [
-//     'typings/index.d.ts',
 //     join(APP_CLIENT_SRC, '**/*.ts'),
 //     '!' + join(APP_CLIENT_SRC, '**/*.spec.ts'),
 //     '!' + join(APP_CLIENT_SRC, '**/*.e2e-spec.ts')
