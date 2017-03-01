@@ -57,12 +57,12 @@ export = () => {
   }
 
   return result.js
-    .pipe(plugins.sourcemaps.write())
-          //  .pipe(plugins.sourcemaps.write('.', {
-          //    includeContent: false,
-          //    sourceRoot: (file: any) =>
-          //       relative(Config.APP_SERVER_DEST, Config.PROJECT_ROOT) + '/' + Config.APP_SERVER_SRC
-          //  }))
+    .pipe(plugins.sourcemaps.write('.', {
+      includeContent: false,
+      sourceRoot: (file: any) => {
+          return join(relative(Config.APP_SERVER_DEST, Config.PROJECT_ROOT), Config.APP_SERVER_SRC);
+      }
+    }))
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(Config.APP_SERVER_DEST));
 };

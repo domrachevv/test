@@ -7,7 +7,10 @@
       "request": "launch",
       "preLaunchTask": "build.dev_full",
       "program": "${workspaceRoot}/app.server.dev.js",
-      "cwd": "${workspaceRoot}"
+      "cwd": "${workspaceRoot}",
+      "outFiles": [
+        "${workspaceRoot}/dist/dev/server/**/*.js"
+      ]
     },
     {
       "name": "Start server debug (fast)",
@@ -15,14 +18,20 @@
       "request": "launch",
       "preLaunchTask": "build.dev",
       "program": "${workspaceRoot}/app.server.dev.js",
-      "cwd": "${workspaceRoot}"
+      "cwd": "${workspaceRoot}",
+      "outFiles": [
+        "${workspaceRoot}/dist/dev/**/*.js"
+      ]
     },
     {
       "name": "Start server debug (no rebuild)",
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/app.server.dev.js",
-      "cwd": "${workspaceRoot}"
+      "cwd": "${workspaceRoot}",
+      "outFiles": [
+        "${workspaceRoot}/dist/dev/server/**/*.js"
+      ]
     },
     {
       "name": "Start server debug (prod)",
