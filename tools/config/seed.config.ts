@@ -339,16 +339,13 @@ export class SeedConfig {
     { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
   ];
 
-  InjectableStyleExtension = `${this.getInjectableStyleExtension()}`;
+  INJECTABLE_STYLE_EXTENSION = `${this.getInjectableStyleExtension()}`;
   /**
    * The list of local files to be injected in the `index.html`.
    * @type {InjectableDependency[]}
    */
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.${this.InjectableStyleExtension}`, inject: true, vendor: false },
-    { src: `${this.ASSETS_SRC}/css/evolution.${this.InjectableStyleExtension}`, inject: true },
-    { src: `${this.ASSETS_SRC}/css/evolution_ui.${this.InjectableStyleExtension}`, inject: true },
-    { src: `${this.ASSETS_SRC}/css/smb-global.${this.InjectableStyleExtension}`, inject: true  },
+    { src: `${this.CSS_SRC}/main.${this.INJECTABLE_STYLE_EXTENSION}`, inject: true, vendor: false }
   ];
 
   /**
@@ -397,21 +394,11 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/*': '/app/*',
-      'routing/': '/routing/routes',
-      'npm:': 'node_modules/',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
-    packages: {
-      primeng: {
-          defaultExtension: 'js'
-      }/*,
-      'lodash': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }*/
-    }
+    packages: { }
   };
 
   /**
