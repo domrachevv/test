@@ -9,8 +9,9 @@ import * as routes from './routes';
 
 import { Init } from './db/mongo';
 
-var _clientDir = '../client';
-var app = express();
+let _clientDir = '../client';
+let app = express();
+let logger = require('morgan');
 
 export function init(port: number, mode: string) {
 
@@ -40,6 +41,7 @@ export function init(port: number, mode: string) {
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
       next();
     });
+    app.use(logger('dev'));
 
     routes.init(app);
 
@@ -47,11 +49,6 @@ export function init(port: number, mode: string) {
     let clientRoot = path.resolve(__dirname, _clientDir);
     app.use(express.static(root));
     app.use(express.static(clientRoot));
-
-    let renderIndex = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
-    };
-    app.get('/*', renderIndex);
   }
   else {
     /**
@@ -69,21 +66,16 @@ export function init(port: number, mode: string) {
     app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
     app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
     app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
-
-    /**
-     * Spa Res Sender.
-     * @param req {any}
-     * @param res {any}
-     */
-    let renderIndex = function (req: express.Request, res: express.Response) {
-      res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
-    };
-
-    /**
-     * Prevent server routing and use @ng2-router.
-     */
-    app.get('/*', renderIndex);
   }
+
+  let renderIndex = function (req: express.Request, res: express.Response) {
+    res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
+  };
+
+  /**
+   * Prevent server routing and use @ng2-router.
+   */
+  app.get('/*', renderIndex);
 
   /**
    * Server with gzip compression.

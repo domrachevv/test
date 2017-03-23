@@ -398,7 +398,12 @@ export class SeedConfig {
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
-    packages: { }
+    packages: {
+      'morgan': {
+          main: './index.js',
+          defaultExtension: 'js'
+      }
+    }
   };
 
   /**
@@ -429,13 +434,8 @@ export class SeedConfig {
       [`${this.TMP_CLIENT_DIR}/*`]: `${this.TMP_CLIENT_DIR}/*`,
       [`${this.TMP_CLIENT_DIR}/*`.replace(/\//g, '\\')]: `${this.TMP_CLIENT_DIR}/*`,
 
-      /*'dist\\tmp_client\\app\\*': 'dist/tmp_client/app/*', 
-      'dist/tmp_client/*': 'dist/tmp_client/*',
-      'dist\\tmp_client\\*': 'dist/tmp_client/*',*/
-      'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
-      //'dist\\tmp_client\\node_modules\\*': 'dist/tmp_client/node_modules/*',
+      'dist/tmp_client/node_modules/*': 'dist/tmp_client/node_modules/*',
       'node_modules/*': 'node_modules/*',
-      //'node_modules\\*': 'node_modules/*',
       '*': 'node_modules/*'
     },
     packages: {
