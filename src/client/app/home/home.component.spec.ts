@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
@@ -13,53 +13,48 @@ import {
 import { MockBackend } from '@angular/http/testing';
 
 import { NameListService } from '../shared/index';
-import { HomeModule } from './home.module';
+import { HomeComponent } from './home.component';
 
 export function main() {
   describe('Home component', () => {
-    // setting module for testing
-    // Disable old forms
+    let fixture: ComponentFixture<TestComponent>;
+    let homeDOMEl: HTMLElement;
+    
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [FormsModule, RouterModule, HttpModule, HomeModule],
-        declarations: [TestComponent],
+        imports: [
+          FormsModule, 
+          RouterModule, 
+          HttpModule
+        ],
+        declarations: [
+          TestComponent, 
+          HomeComponent
+          ],
         providers: [
-          NameListService,
-          BaseRequestOptions,
-          MockBackend,
-          {provide: Http, useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
-              return new Http(backend, defaultOptions);
-            },
-            deps: [MockBackend, BaseRequestOptions]
-          },
+          NameListService
         ]
       });
     });
 
+    beforeEach(async(() => {
+      TestBed
+        .compileComponents()
+        .then(() => {
+          fixture = TestBed.createComponent(TestComponent);
+          homeDOMEl = fixture.debugElement.nativeElement;
+        });
+    }));
+
+
     it('should work',
-      async(() => {
-        TestBed
-          .compileComponents()
-          .then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
-            fixture.detectChanges();
+      () => {
+         let homeInstance = fixture.debugElement.children[0].componentInstance;
+         homeInstance.names = [{first_name: 'Minko'}];
+         fixture.detectChanges();
 
-            let homeInstance = fixture.debugElement.children[0].componentInstance;
-            let homeDOMEl = fixture.debugElement.children[0].nativeElement;
-
-            expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
-            expect(homeDOMEl.querySelectorAll('li').length).toEqual(0);
-
-            homeInstance.newName = 'Minko';
-            homeInstance.addName();
-
-            fixture.detectChanges();
-
-            expect(homeDOMEl.querySelectorAll('li').length).toEqual(1);
-            expect(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual('Minko');
-          });
-
-      }));
+         expect(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual("Minko");
+      });
   });
 }
 
