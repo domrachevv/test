@@ -7,8 +7,7 @@ import { NameListService } from '../shared/index';
 @Component({
   moduleId: module.id,
   selector: 'sd-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+  templateUrl: 'home.component.html'
 })
 
 export class HomeComponent implements OnInit {
@@ -17,12 +16,6 @@ export class HomeComponent implements OnInit {
   errorMessage: string;
   names: any[] = [];
 
-  /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
-   *
-   * @param {NameListService} nameListService - The injected NameListService.
-   */
   constructor(public nameListService: NameListService) {}
 
   /**

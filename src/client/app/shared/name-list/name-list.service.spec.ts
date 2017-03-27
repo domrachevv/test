@@ -10,6 +10,7 @@ export function main() {
     let nameListService: NameListService;
     let mockBackend: MockBackend;
     let initialResponse: any;
+    let names: any;
 
     beforeEach(() => {
 
@@ -30,17 +31,10 @@ export function main() {
       let connection: any;
       mockBackend.connections.subscribe((c: any) => connection = c);
       initialResponse = nameListService.get();
-      connection.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })));
     });
 
     it('should return an Observable when get called', () => {
       expect(initialResponse).toEqual(jasmine.any(Observable));
-    });
-
-    it('should resolve to list of names when get called', () => {
-      let names: any;
-      initialResponse.subscribe((data: any) => names = data);
-      expect(names).toEqual(['Dijkstra', 'Hopper']);
     });
   });
 }
