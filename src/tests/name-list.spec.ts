@@ -1,4 +1,5 @@
 import { nameList } from '../server/services/name.list';
+import {} from 'mocha';
 import Config from '../server/config/server.config';
 
 var UserModel = require('../server/db/entity/user');
@@ -9,7 +10,7 @@ var server = supertest.agent("http://localhost:" + Config.PORT);
 var should   = require('chai').should();
 var mongoose = require('mongoose');
 var clearDB  = require('mocha-mongoose')(dbURI);
-let nameData = require('../server/data/name.list.json');
+var nameData = require('../server/data/name.list.json');
 var app = express();
 module.exports = app;
 
@@ -31,40 +32,16 @@ describe('Mongoose ', function () {
         mongoose.connect(dbURI, done);
     });
 
-    it("check user list is empty", function(done: any) {
-        server.get('/api/name-list')
-            .expect(200)
-            .end(function(err: any,res: any){
-                // HTTP status should be 200
-                res.status.should.equal(200);
-                if (err) return done(err);
-                done();
-            });
+    afterEach(function (done: any) {
+        clearDB(done);
     });
 
-    it("check static name list", function(done: any) {
-        server.get('/api/name-list/static')
-            .expect(200)
-            .end(function(err: any,res: any){
-                // HTTP status should be 200
-                res.status.should.equal(200);
-                res.body.should.eql(nameData);
-                if (err) return done(err);
-                done();
-            });
-    });
-
-    it("check user is saved successfully", function(done: any) {
-        server.post('/api/name-list')
-            .send(user)
-            .expect(200)
-            .end(function(err: any,res: any){
-                // HTTP status should be 200
-                res.status.should.equal(200);
-                res.body.data.first_name.should.equal(user.first_name);
-                if (err) return done(err);
-                done();
-            });
+    after(function (done: any) {
+        mongoose.connection.db.dropDatabase(function () {
+             mongoose.connection.close(function () {
+                  done();
+              });
+         });
     });
 
     it("can save dummy user", function(done: any) {
@@ -75,6 +52,40 @@ describe('Mongoose ', function () {
                  done();
             });
         });
+    });
+
+    it("check user list is empty", function(done: any) {
+        server.get('/api/name-list')
+            .end(function(err: any,res: any){
+                if (err) return done(err);
+                // HTTP status should be 200
+                res.status.should.equal(200);
+                res.body.data.should.eql([]);
+                done();
+            });
+    });
+
+    it("check static name list", function(done: any) {
+        server.get('/api/name-list/static')
+            .end(function(err: any,res: any){
+                if (err) return done(err);
+
+                res.status.should.equal(200);
+                res.body.should.eql(nameData);
+                done();
+            });
+    });
+
+    it("check user is saved successfully", function(done: any) {
+        server.post('/api/name-list')
+            .send(user)
+            .end(function(err: any,res: any){
+                if (err) return done(err);
+
+                res.status.should.equal(200);
+                res.body.data.first_name.should.equal(user.first_name);
+                done();
+            });
     });
 });
 

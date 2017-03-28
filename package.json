@@ -33,7 +33,7 @@
     "start.deving": "gulp serve.dev --nolazy --debug-brk=5858 --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
-    "test.server": "nyc --reporter=html --exclude src/**/*.spec.ts gulp test.server --color",
+    "test.server": "nyc --reporter=html --exclude dist/**/*.spec.js gulp test.server --color",
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
