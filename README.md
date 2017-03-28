@@ -239,9 +239,28 @@ server {
 }
 ```
 
-# MongoDB
+# MongoDB Download/Install
 
- - In progress
+ - About [MongoDB](https://www.mongodb.com/).
+ - [Download](https://www.mongodb.com/download-center#community) and [install](https://docs.mongodb.com/manual/administration/install-community/) latest stable version of MongoDB.
+ - [Documentation](https://docs.mongodb.com/manual/) about MongoDB.
+
+# MongoDB Start
+After installation we need to start our server:
+```sh
+# start server
+$ mongod
+```
+
+# MongoDB app configuration
+Our node application by default uses the following connection: 'mongodb://localhost/mongotest'. To override this setting you can simply pass the connection string via the cmd parameter:
+```sh
+# start node dev server
+$ node app.server.dev.js --mongo_connection=[target mongo connection]
+```
+
+or by setting MONGO_CONNECTION environment variable. The priority is
+command line parameter > environment variable > default connection
 
 # Contributors
 
