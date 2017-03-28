@@ -143,6 +143,11 @@ export class SeedConfig {
   APP_CLIENT = argv['client'] || 'client';
 
   /**
+   * @type {string}
+   */
+  APP_TESTS = argv['tests'] || 'tests';
+
+  /**
    * The directory where the server files are located.
    * The default directory is `server`.
    * @type {string}
@@ -175,6 +180,12 @@ export class SeedConfig {
    * @type {string}
    */
   APP_CLIENT_SRC = `src/${this.APP_CLIENT}`;
+
+  /**
+   * The base folder of the mocha tests source files.
+   * @type {string}
+   */
+  APP_TESTS_SRC = `src/${this.APP_TESTS}`;
 
   /**
    * The base folder of the server source files.
@@ -224,6 +235,18 @@ export class SeedConfig {
   DIST_DIR = 'dist';
 
   /**
+   * The folder for built tests files in the `prod` environment.
+   * @type {string}
+   */
+  PROD_TESTS_DEST = `${this.DIST_DIR}/prod/${this.APP_TESTS}`;
+
+  /**
+   * The folder for built tests files in the `dev` environment.
+   * @type {string}
+   */
+  DEV_TESTS_DEST = `${this.DIST_DIR}/dev/${this.APP_TESTS}`;
+
+  /**
    * The folder for built client files in the `dev` environment.
    * @type {string}
    */
@@ -264,6 +287,12 @@ export class SeedConfig {
    * @type {string}
    */
   APP_CLIENT_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? this.DEV_CLIENT_DEST : this.PROD_CLIENT_DEST;
+
+  /**
+   * The folder for the built client files, corresponding to the current environment.
+   * @type {string}
+   */
+  APP_TESTS_DEST = this.DEV_TESTS_DEST;
 
   /**
    * The folder for the built server files, corresponding to the current environment.
