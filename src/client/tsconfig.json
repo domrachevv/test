@@ -22,7 +22,6 @@
     "types": [
       "core-js",
       "express",
-      "jasmine",
       "node",
       "protractor",
       "systemjs"

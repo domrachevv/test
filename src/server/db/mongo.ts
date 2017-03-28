@@ -11,7 +11,7 @@ export function Init() {
     if (err) {
       console.log(err.message);
       console.log(err);
-    }  else {
+    } else {
       console.log('Connected to MongoDb');
     }
   });
