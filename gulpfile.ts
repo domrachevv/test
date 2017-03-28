@@ -104,6 +104,19 @@ gulp.task('build.test', (done: any) =>
               'build.html_css',
               'build.js.dev',
               'build.js.test',
+              'build.index.dev',
+              'build.server.dev',
+              'copy.server.assets',
+              done));
+
+// --------------
+// Build test.server
+gulp.task('build.test.server', (done: any) =>
+  runSequence('clean.once',
+              //'tslint',
+              'build.assets.dev',
+              'build.html_css',
+              'build.js.dev',
               'build.js.test.server',
               'build.index.dev',
               'build.server.dev',
@@ -169,7 +182,7 @@ gulp.task('test', (done: any) =>
 // Test.server.
 gulp.task('test.server', (done: any) =>
   runSequence('cleanup',
-              'build.test',
+              'build.test.server',
               'run.tests',
               done));
 

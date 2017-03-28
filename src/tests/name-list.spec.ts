@@ -32,10 +32,6 @@ describe('Mongoose ', function () {
         mongoose.connect(dbURI, done);
     });
 
-    afterEach(function (done: any) {
-        clearDB(done);
-    });
-
     after(function (done: any) {
         mongoose.connection.db.dropDatabase(function () {
              mongoose.connection.close(function () {
