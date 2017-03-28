@@ -174,7 +174,8 @@ gulp.task('serve.prod.exp', (done: any) =>
 // --------------
 // Test.
 gulp.task('test', (done: any) =>
-  runSequence('build.test',
+  runSequence('cleanup',
+              'build.test',
               'karma.run',
               done));
 
