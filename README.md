@@ -16,7 +16,7 @@ Include:
 
 # Visual Studio Code
 
-This project has full support for VS Code development including server side debugging! No additional actions required - there are 'debugging' menu for your need:
+This project has full support for VS Code development including server side debugging! No additional actions required - there are 'debugging' menu options for your need:
 - Start server debug (full)
 - Start server debug (fast) - this configuration skips building 'scss' files thus speeding up the build a little bit
 - Start server debug (no rebuild) - this one is handy to just start the node server, no build actions performed (extremely fast if you just want to restart the server with previously built sources)
