@@ -4,7 +4,8 @@ import * as runSequence from 'run-sequence';
 
 import Config from './tools/config';
 import { loadTasks } from './tools/utils';
-
+const settings = require('./tools/tasks/extra/buildSettings');
+const removeDirRecursive = require('./tools/tasks/extra/removeDirRecursive');
 
 loadTasks(Config.SEED_TASKS_DIR);
 loadTasks(Config.PROJECT_TASKS_DIR);
@@ -103,6 +104,7 @@ gulp.task('build.test', (done: any) =>
               'build.html_css',
               'build.js.dev',
               'build.js.test',
+              'build.js.test.server',
               'build.index.dev',
               'build.server.dev',
               'copy.server.assets',
@@ -162,6 +164,18 @@ gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.run',
               done));
+
+// --------------
+// Test.server.
+gulp.task('test.server', (done: any) =>
+  runSequence('cleanup',
+              'build.test',
+              'run.tests',
+              done));
+
+gulp.task('cleanup', function () {
+  removeDirRecursive(settings.buildDir);
+});
 
 // --------------
 // Clean directories after i18n

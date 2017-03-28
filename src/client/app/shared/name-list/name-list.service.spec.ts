@@ -8,12 +8,9 @@ import { NameListService } from './name-list.service';
 export function main() {
   describe('NameList Service', () => {
     let nameListService: NameListService;
-    let mockBackend: MockBackend;
     let initialResponse: any;
-    let names: any;
 
     beforeEach(() => {
-
       let injector = ReflectiveInjector.resolveAndCreate([
         NameListService,
         BaseRequestOptions,
@@ -26,10 +23,6 @@ export function main() {
         },
       ]);
       nameListService = injector.get(NameListService);
-      mockBackend = injector.get(MockBackend);
-
-      let connection: any;
-      mockBackend.connections.subscribe((c: any) => connection = c);
       initialResponse = nameListService.get();
     });
 
