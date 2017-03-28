@@ -52,9 +52,6 @@ module.exports = function (config) {
       { pattern: 'dist/dev/**/*.css', included: false, watched: true, served: true },
       { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false }, // PhantomJS2 (and possibly others) might require it
 
-      // suppress annoying 404 warnings for resources, images, etc.
-      { pattern: 'dist/dev/assets/**/*', watched: false, included: false, served: true },
-
       'test-config.js',
       'dist/dev/client/app/system-config.js',
       'test-main.js'
