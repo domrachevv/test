@@ -141,7 +141,8 @@
     "async-mocha": "*",
     "supertest": "*",
     "mocha-mongoose": "*",
-    "chai": "*"
+    "chai": "*",
+    "karma-firefox-launcher": "*"
   },
   "dependencies": {
     "@angular/common": "~2.1.2",
