@@ -2,24 +2,32 @@
 
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/vyakymenko/angular2-seed-express.svg?branch=master)](https://travis-ci.org/vyakymenko/angular2-seed-express)
-[![Dependency Status](https://david-dm.org/vyakymenko/angular2-seed-express.svg)](https://david-dm.org/vyakymenko/angular2-seed-express)
-[![devDependency Status](https://david-dm.org/vyakymenko/angular2-seed-express/dev-status.svg)](https://david-dm.org/vyakymenko/angular2-seed-express#info=devDependencies)
 
 **Want to feel like a full-stack Angular 2 developer but know only Express?**
 
-This is an express seed project for Angular 2 apps based on [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed).
+This is a MEAN project for Angular 2 apps based on [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/mgechev/angular2-seed-express).
 Include:
  
-- Full include from [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed).
+- Full include from [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/mgechev/angular2-seed-express).
 - [Express](https://expressjs.com/) Express Node.js server for production/development build API.
+- [MongoDB](https://www.mongodb.com/) MongoDB full integration with configurable connection parameters.
 - [PM2](http://pm2.keymetrics.io/) daemon for a server running.
 - [Nginx](https://github.com/vyakymenko/angular2-nginx-config-example/blob/master/ng2-application.conf) configuration file for your server.
+
+# Visual Studio Code
+
+This project has full support for VS Code development including server side debugging! No additional actions required - there are 'debugging' menu options for your need:
+- Start server debug (full)
+- Start server debug (fast) - this configuration skips building 'scss' files thus speeding up the build a little bit
+- Start server debug (no rebuild) - this one is handy to just start the node server, no build actions performed (extremely fast if you just want to restart the server with previously built sources)
+- Start server debug (prod) - prod build and debug
+- Start server debug (prod no rebuild)
 
 # Fast start
 
 For Angular 2 development information and wiki, look here:
- - [Angular2-Seed](https://github.com/mgechev/angular2-seed) Wow wow it's our parent :)
+ - [Angular2-Seed](https://github.com/mgechev/angular2-seed) This is our main parent repository
+ - [Angular2-Seed-Express](https://github.com/mgechev/angular2-seed-express) This is our direct parent repository which we based our project on
  - [Angular2-Seed-WIKI](https://github.com/mgechev/angular2-seed/wiki) Wiki Information about Seed!
  - [Angular2-Seed-Advanced](https://github.com/mgechev/angular2-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
 
@@ -38,12 +46,6 @@ $ npm run build.dev
 # prod build
 $ npm run build.prod
 
-# run Redis
-$ src/redis-server
-# stop Redis
-$ src/redis-cli
-$ shutdown SAVE
-
 # run Express server (keep in touch, only after `npm run build.prod` )
 $ node app.server.prod.js
 # or development
@@ -55,7 +57,7 @@ $ pm2 start app.server.prod.js
 
 # Need to know
 
-Before starting development. Run you development server:
+Before starting development. Run your development server:
 ```sh
 # run dev server
 $ node app.server.dev.js
@@ -237,32 +239,28 @@ server {
 }
 ```
 
-# Redis Download/Install
+# MongoDB Download/Install
 
- - About [Redis](http://redis.io/).
- - [Download](http://redis.io/download#download) and [install](http://redis.io/download#installation) latest stable version of Redis.
- - [Documentation](http://redis.io/documentation) about Redis.
+ - About [MongoDB](https://www.mongodb.com/).
+ - [Download](https://www.mongodb.com/download-center#community) and [install](https://docs.mongodb.com/manual/administration/install-community/) latest stable version of MongoDB.
+ - [Documentation](https://docs.mongodb.com/manual/) about MongoDB.
 
-# Redis Start
-
+# MongoDB Start
 After installation we need to start our server:
 ```sh
 # start server
-$ src/redis-server
+$ mongod
 ```
 
-# Redis More Settings + Daemonize
+# MongoDB app configuration
+Our node application by default uses the following connection: 'mongodb://localhost/mongotest'. To override this setting you can simply pass the connection string via the cmd parameter:
+```sh
+# start node dev server
+$ node app.server.dev.js --mongo_connection=[target mongo connection]
+```
 
- - Redis [Persistence](http://redis.io/topics/quickstart#redis-persistence)
- - Redis [More Properties](http://redis.io/topics/quickstart#installing-redis-more-properly)
-
-# MongoDB
-
- - In progress
-
-# MySQL
-
- - In progress
+or by setting MONGO_CONNECTION environment variable. The priority is
+command line parameter > environment variable > default connection
 
 # Contributors
 
