@@ -262,6 +262,42 @@ $ node app.server.dev.js --mongo_connection=[target mongo connection]
 or by setting MONGO_CONNECTION environment variable. The priority is
 command line parameter > environment variable > default connection
 
+# Karma test configuration
+Karma configuration could be found in karma.conf.js file
+
+# Karma test launcher
+Karma test launcher is placed in test-main.js file.
+There are a few ways how to start karma test: 
+```
+* via console: npm test
+* choosing prod.build configuration and launch the application
+```
+
+# Mocha test configuration
+Mocha configuration could be found in mocha.conf.js and run.tests.ts files. 
+The test folder scr is described in buildSettings.ts file.
+
+# Mocha test launcher
+There are a few ways how to start mocha test: 
+```
+* via console: npm run test.server
+* choosing Mocha Tests configuration and launch the application
+```
+
+# Test launcher
+To start all tests (both karma and mocha) use npm run tests.all or choose build.prod configuration and launch the application.
+Test tasks could be found description in gulpfile.ts. Some options are configured in script description in package.json file.
+
+# Test coverage
+You could see the application coverage via Istanbul: open coverage folder in the app root folder then ope index.html file.
+Istanbul configuration placed in seed.config.ts file.
+```
+# code coverage (istanbul)
+# auto-generated at the end of `npm test`
+# view coverage report:
+$ npm run serve.coverage 
+```
+
 # Contributors
 
 [<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |[<img alt="d3viant0ne" src="https://avatars.githubusercontent.com/u/8420490?v=3&s=117" width="117">](https://github.com/d3viant0ne) |[<img alt="Shyam-Chen" src="https://avatars.githubusercontent.com/u/13535256?v=3&s=117" width="117">](https://github.com/Shyam-Chen) |[<img alt="tarlepp" src="https://avatars.githubusercontent.com/u/595561?v=3&s=117" width="117">](https://github.com/tarlepp) |[<img alt="NathanWalker" src="https://avatars.githubusercontent.com/u/457187?v=3&s=117" width="117">](https://github.com/NathanWalker) |
