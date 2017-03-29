@@ -1,18 +1,11 @@
-import { nameList } from '../server/services/name.list';
 import {} from 'mocha';
-import Config from '../server/config/server.config';
+import { NameListServer } from '../server/services/name.list';
 
 var UserModel = require('../server/db/entity/user');
-var express = require('express');
 var dbURI    = 'mongodb://localhost/mongotest';
-var supertest = require('supertest');
-var server = supertest.agent("http://localhost:" + Config.PORT);
 var should   = require('chai').should();
 var mongoose = require('mongoose');
-var clearDB  = require('mocha-mongoose')(dbURI);
-var nameData = require('../server/data/name.list.json');
-var app = express();
-module.exports = app;
+let nameData = require('../server/data/name.list.json');
 
 function createUser(value: string) {
     var user = new UserModel();
@@ -24,6 +17,7 @@ function createUser(value: string) {
 }
 
 describe('Mongoose ', function () {
+    let nameListServer = new NameListServer;
     var user = createUser("fake user");
     var userId = user._id;
 
@@ -51,37 +45,22 @@ describe('Mongoose ', function () {
     });
 
     it("check user list is empty", function(done: any) {
-        server.get('/api/name-list')
-            .end(function(err: any,res: any){
-                if (err) return done(err);
-                // HTTP status should be 200
-                res.status.should.equal(200);
-                res.body.data.should.eql([]);
-                done();
-            });
+        nameListServer.getAllUsers().then((res: any) => {
+            res.should.eql([]);
+            done();
+        });
     });
 
-    it("check static name list", function(done: any) {
-        server.get('/api/name-list/static')
-            .end(function(err: any,res: any){
-                if (err) return done(err);
-
-                res.status.should.equal(200);
-                res.body.should.eql(nameData);
-                done();
-            });
+    it("check static user list", function(done: any) {
+        nameListServer.getStaticUsers().should.eql(nameData);
+        done();
     });
 
     it("check user is saved successfully", function(done: any) {
-        server.post('/api/name-list')
-            .send(user)
-            .end(function(err: any,res: any){
-                if (err) return done(err);
-
-                res.status.should.equal(200);
-                res.body.data.first_name.should.equal(user.first_name);
-                done();
-            });
+        nameListServer.saveUser(user).then((res: any) => {
+            res.first_name.should.eql(user.first_name);
+            done();
+        });
     });
 });
 
