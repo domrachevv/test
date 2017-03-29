@@ -1,66 +1,55 @@
 import {} from 'mocha';
 import { NameListServer } from '../server/services/name.list';
 
-var UserModel = require('../server/db/entity/user');
+import { User, IUserModel } from '../server/db/entity/user';
 var dbURI    = 'mongodb://localhost/mongotest';
 var should   = require('chai').should();
 var mongoose = require('mongoose');
 let nameData = require('../server/data/name.list.json');
 
 function createUser(value: string) {
-    var user = new UserModel();
-    user.email = value;
-    user.last_name = value;
-    user.first_name = value;
-
-    return user;
+    return new User({
+        email: value,
+        last_name: value,
+        first_name: value
+    });
 }
 
 describe('Mongoose ', function () {
     let nameListServer = new NameListServer;
-    var user = createUser("fake user");
-    var userId = user._id;
 
-    beforeEach(function(done: any) {
-        if (mongoose.connection.db) return done();
+    before(function(done: MochaDone) {
         mongoose.connect(dbURI, done);
     });
 
-    after(function (done: any) {
-        mongoose.connection.db.dropDatabase(function () {
-             mongoose.connection.close(function () {
-                  done();
-              });
-         });
+    after(function (done: MochaDone) {
+        mongoose.connection.close(done);
     });
 
-    it("can save dummy user", function(done: any) {
-        new UserModel(user).save(function(err: any, model: any){
-            UserModel.find(user, function(err: any, docs: any){
-                 if (err) return done(err);
-                 docs.length.should.equal(1);
-                 done();
-            });
-        });
-    });
-
-    it("check user list is empty", function(done: any) {
+    it("check user list is empty", function(done: MochaDone) {
         nameListServer.getAllUsers().then((res: any) => {
             res.should.eql([]);
             done();
         });
     });
 
-    it("check static user list", function(done: any) {
+    it("check static user list", function(done: MochaDone) {
         nameListServer.getStaticUsers().should.eql(nameData);
         done();
     });
 
-    it("check user is saved successfully", function(done: any) {
-        nameListServer.saveUser(user).then((res: any) => {
-            res.first_name.should.eql(user.first_name);
-            done();
-        });
-    });
-});
+    it("check user is saved successfully", function(done: MochaDone) {
+        let user = createUser("fake user");
 
+        nameListServer.saveUser(user)
+            .then((res: IUserModel) => {
+                should(res.first_name).eql(user.first_name);
+            })
+            .then(() => cleanUpFakeUser(user._id, done))
+            .catch(() => cleanUpFakeUser(user._id, done));
+    });
+
+    function cleanUpFakeUser(userId: string, done: MochaDone) {
+        User.findByIdAndRemove(userId, done);
+    }
+});
