@@ -1,18 +1,17 @@
 import { Observable } from 'rxjs/Observable';
-import * as user from '../db/entity/user';
+import { User, IUserModel } from '../db/entity/user';
 
 let nameData = require('../data/name.list.json');
 export class NameListServer {
-
   getStaticUsers(){
     return nameData;
   }
 
   getAllUsers() {
-    return user.find().catch((err: any) => err);
+    return User.find().catch((err: any) => err);
   }
 
-  saveUser(user: any){
+  saveUser(user: IUserModel): Promise<IUserModel> {
     return user.save().catch((err: any) => (err));
   }
 }
