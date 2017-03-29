@@ -13,19 +13,6 @@
       ]
     },
     {
-      "type": "node",
-      "request": "launch",
-      "preLaunchTask": "run.tests",
-      "name": "Mocha Tests",
-      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-      "args": ["${workspaceRoot}/dist/dev/tests/**/*.js", "--no-timeouts"],
-      "cwd": "${workspaceRoot}",
-      "stopOnEntry": false,
-      "sourceMaps": true,
-      "runtimeExecutable": null,
-      "internalConsoleOptions": "openOnSessionStart"
-    },
-    {
       "name": "Start server debug (fast)",
       "type": "node",
       "request": "launch",
@@ -60,6 +47,19 @@
       "request": "launch",
       "program": "${workspaceRoot}/app.server.prod.js",
       "cwd": "${workspaceRoot}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "run.tests",
+      "name": "Mocha Tests",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "args": ["${workspaceRoot}/dist/dev/tests/**/*.js", "--no-timeouts"],
+      "cwd": "${workspaceRoot}",
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "runtimeExecutable": null,
+      "internalConsoleOptions": "openOnSessionStart"
     },
     {
       "name": "Launch Chrome against localhost, with sourcemaps",

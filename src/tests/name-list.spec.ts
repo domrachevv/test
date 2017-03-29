@@ -1,5 +1,5 @@
 import {} from 'mocha';
-import { NameListServer } from '../server/services/name.list';
+import { NameListService } from '../server/services/name.list';
 
 import { User, IUserModel } from '../server/db/entity/user';
 var dbURI    = 'mongodb://localhost/mongotest';
@@ -16,7 +16,7 @@ function createUser(value: string) {
 }
 
 describe('Mongoose ', function () {
-    let nameListServer = new NameListServer;
+    let nameListService = new NameListService;
 
     before(function(done: MochaDone) {
         mongoose.connect(dbURI, done);
@@ -27,21 +27,21 @@ describe('Mongoose ', function () {
     });
 
     it("check user list is empty", function(done: MochaDone) {
-        nameListServer.getAllUsers().then((res: any) => {
+        nameListService.getAllUsers().then((res: any) => {
             res.should.eql([]);
             done();
         });
     });
 
     it("check static user list", function(done: MochaDone) {
-        nameListServer.getStaticUsers().should.eql(nameData);
+        nameListService.getStaticUsers().should.eql(nameData);
         done();
     });
 
     it("check user is saved successfully", function(done: MochaDone) {
         let user = createUser("fake user");
 
-        nameListServer.saveUser(user)
+        nameListService.saveUser(user)
             .then((res: IUserModel) => {
                 should(res.first_name).eql(user.first_name);
             })

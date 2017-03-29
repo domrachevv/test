@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { User, IUserModel } from '../db/entity/user';
 
 let nameData = require('../data/name.list.json');
-export class NameListServer {
+export class NameListService {
   getStaticUsers(){
     return nameData;
   }

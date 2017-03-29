@@ -1,18 +1,18 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import { User } from '../db/entity/user';
-import { NameListServer } from './name.list';
+import { NameListService } from './name.list';
 
 let nameData = require('../data/name.list.json');
 
 export function nameList(app: Application) {
-  let nameListServer = new NameListServer;
+  let nameListService = new NameListService;
   /**
    * Get name list.
    * @static
    */
   app.get('/api/name-list/static',
-    (req:any, res:any, next:any) => {
-      var result = nameListServer.getStaticUsers();
+    (req: Request, res: Response, next: NextFunction) => {
+      var result = nameListService.getStaticUsers();
       res.json(result);
     });
 
@@ -22,7 +22,7 @@ export function nameList(app: Application) {
    */
   app.get('/api/name-list',
     (req: Request, res: Response, next: NextFunction) => {
-      nameListServer.getAllUsers().then((result: any) => {
+      nameListService.getAllUsers().then((result: any) => {
         if (result.errors) {
               res.json({ info: 'error during User create', error: result.errors });
           }
@@ -35,9 +35,9 @@ export function nameList(app: Application) {
    * @database
    */
   app.post('/api/name-list',
-    (req:any, res:any, next:any) => {
+    (req: Request, res: Response, next: NextFunction) => {
       var newUser = new User(req.body);
-      nameListServer.saveUser(newUser).then((res: any) => {
+      nameListService.saveUser(newUser).then((res: any) => {
         if (res.errors) {
               res.json({ info: 'error during User create', error: res.errors });
           }
