@@ -1,9 +1,9 @@
 import {} from 'mocha';
+import { expect, should } from 'chai';
 import { NameListService } from '../server/services/name.list';
 
 import { User, IUserModel } from '../server/db/entity/user';
 var dbURI    = 'mongodb://localhost/mongotest';
-var should   = require('chai').should();
 var mongoose = require('mongoose');
 let nameData = require('../server/data/name.list.json');
 
@@ -27,26 +27,27 @@ describe('Mongoose ', function () {
     });
 
     it("check user list is empty", function(done: MochaDone) {
-        nameListService.getAllUsers().then((res: any) => {
-            res.should.eql([]);
+        nameListService.getAllUsers().then((res: IUserModel[]) => {
+            //should().equal(res.length, 0);
+            expect(res.length).to.be.equal(0);
             done();
         });
     });
 
     it("check static user list", function(done: MochaDone) {
-        nameListService.getStaticUsers().should.eql(nameData);
+        should().equal(nameListService.getStaticUsers(), nameData);
         done();
     });
 
     it("check user is saved successfully", function(done: MochaDone) {
-        let user = createUser("fake user");
+        let fakeUser = createUser("fake user");
 
-        nameListService.saveUser(user)
-            .then((res: IUserModel) => {
-                should(res.first_name).eql(user.first_name);
+        nameListService.saveUser(fakeUser)
+            .then((user: IUserModel) => {
+                should().equal(user, fakeUser);
             })
-            .then(() => cleanUpFakeUser(user._id, done))
-            .catch(() => cleanUpFakeUser(user._id, done));
+            .then(() => cleanUpFakeUser(fakeUser._id, done))
+            .catch(() => cleanUpFakeUser(fakeUser._id, done));
     });
 
     function cleanUpFakeUser(userId: string, done: MochaDone) {
