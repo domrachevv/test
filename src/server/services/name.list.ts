@@ -12,6 +12,6 @@ export class NameListService {
   }
 
   saveUser(user: IUserModel): Promise<IUserModel> {
-    return user.save().catch((err: any) => (err));
+    return user.save().catch((err: any) => err);
   }
 }

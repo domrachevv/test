@@ -263,37 +263,37 @@ or by setting MONGO_CONNECTION environment variable. The priority is
 command line parameter > environment variable > default connection
 
 # Karma test configuration
-Karma configuration could be found in karma.conf.js file
+If you wish to reconfigure Karma check karma.conf.js file.
 
 # Karma test launcher
-Karma test launcher is placed in test-main.js file.
-There are a few ways how to start karma test: 
-```
-* via console: npm test
-* choosing prod.build configuration and launch the application
-```
+You can execute karma tests via console: npm test.
 
 # Mocha test configuration
-Mocha configuration could be found in mocha.conf.js and run.tests.ts files. 
-The test folder scr is described in buildSettings.ts file.
+If you wish to reconfigure Mocha check mocha.conf.js and run.tests.ts files.
 
 # Mocha test launcher
-There are a few ways how to start mocha test: 
-```
-* via console: npm run test.server
-* choosing Mocha Tests configuration and launch the application
-```
+You can accomplish mocha test in one of the following ways: 
+
+* via console: `npm run test.server`
+* via `Mocha Tests` configuration launch
 
 # Test launcher
-To start all tests (both karma and mocha) use npm run tests.all or choose build.prod configuration and launch the application.
-Test tasks could be found description in gulpfile.ts. Some options are configured in script description in package.json file.
+You can launch both karma and mocha tests via console: `npm run tests.all`.
+Test launcher is included in build.prod configuration also.
 
 # Test coverage
-You could see the application coverage via Istanbul: open coverage folder in the app root folder then ope index.html file.
-Istanbul configuration placed in seed.config.ts file.
+Application coverage is gathered by Istanbul. The coverage data can be viewed here `coverage/index.html`.
+You can get code coverage in the following way:
 ```
-# code coverage (istanbul)
+# karma code coverage (istanbul)
 # auto-generated at the end of `npm test`
+# view coverage report:
+$ npm run serve.coverage 
+```
+
+```
+# mocha code coverage (istanbul / nyc)
+# auto-generated at the end of `npm run test.server`
 # view coverage report:
 $ npm run serve.coverage 
 ```
