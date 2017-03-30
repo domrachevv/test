@@ -12,11 +12,7 @@ const testSrc = settings.testRunDir + '/**/*.spec.js';
 const wrap = require('../extra/wrap');
 
 export = () => {
-  let src = [
-    join(testSrc)
-  ];
-
-  return gulp.src(src)
+  return gulp.src(testSrc)
     .pipe(mocha({ 
       require: join(process.cwd(), 'mocha.conf.js')
     }));
