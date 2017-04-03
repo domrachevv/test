@@ -52,7 +52,7 @@
       "type": "node",
       "request": "launch",
       "preLaunchTask": "run.tests",
-      "name": "Mocha Tests",
+      "name": "Mocha tests",
       "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
       "args": ["${workspaceRoot}/dist/dev/tests/**/*.js", "--no-timeouts"],
       "cwd": "${workspaceRoot}",

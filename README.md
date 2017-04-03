@@ -263,38 +263,38 @@ or by setting MONGO_CONNECTION environment variable. The priority is
 command line parameter > environment variable > default connection
 
 # Karma test configuration
-If you wish to reconfigure Karma check karma.conf.js file.
+If you want to reconfigure Karma check karma.conf.js file.
 
 # Karma test launcher
-You can execute karma tests via console: npm test.
+Karma tests are executed via the console:
+```sh
+$ npm test
+```
 
 # Mocha test configuration
-If you wish to reconfigure Mocha check mocha.conf.js and run.tests.ts files.
+If you want to reconfigure/extend Mocha check run.tests.ts.
 
 # Mocha test launcher
-You can accomplish mocha test in one of the following ways: 
+You have two options to kick off mocha tests:
 
-* via console: `npm run test.server`
-* via `Mocha Tests` configuration launch
+- via console:
+```sh
+$ npm run test.server
+```
+- via 'Mocha tests' configuration launch
 
 # Test launcher
-You can launch both karma and mocha tests via console: `npm run tests.all`.
-Test launcher is included in build.prod configuration also.
+To launch both karma and mocha tests run the following command:
+```sh
+$ npm run tests.all
+```
+
+Test launcher is also included as a part of 'build.prod' npm runnable script (i.e. `npm run build.prod`).
 
 # Test coverage
-Application coverage is gathered by Istanbul. The coverage data can be viewed here `coverage/index.html`.
-You can get code coverage in the following way:
-```
-# karma code coverage (istanbul)
-# auto-generated at the end of `npm test`
-# view coverage report:
-$ npm run serve.coverage 
-```
-
-```
-# mocha code coverage (istanbul / nyc)
-# auto-generated at the end of `npm run test.server`
-# view coverage report:
+Application coverage is gathered by Istanbul. The coverage data (from the latest tests launch - either Karma or Mocha) is summarized in `coverage/index.html`.
+Alternatively this file will be opened as a result of the following command:
+```sh
 $ npm run serve.coverage 
 ```
 
