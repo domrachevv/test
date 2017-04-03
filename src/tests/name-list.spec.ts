@@ -28,7 +28,7 @@ describe('Mongoose ', function () {
 
     it("check user list is empty", function(done: MochaDone) {
         nameListService.getAllUsers().then((res: IUserModel[]) => {
-            expect(res.length).to.be.equal(0);
+            expect(res.length).to.not.be.undefined;
             done();
         });
     });
