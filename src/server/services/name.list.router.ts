@@ -22,12 +22,13 @@ export function nameList(app: Application) {
    */
   app.get('/api/name-list',
     (req: Request, res: Response, next: NextFunction) => {
-      nameListService.getAllUsers().then((result: any) => {
-        if (result.errors) {
+      nameListService.getAllUsers()
+        .then((result: any) => {
+          if (result.errors) {
               res.json({ info: 'error during User create', error: result.errors });
           }
           res.json({ info: 'User saved successfully', data: result });
-      });
+        });
     });
 
   /**
@@ -37,11 +38,12 @@ export function nameList(app: Application) {
   app.post('/api/name-list',
     (req: Request, res: Response, next: NextFunction) => {
       var newUser = new User(req.body);
-      nameListService.saveUser(newUser).then((res: any) => {
-        if (res.errors) {
-              res.json({ info: 'error during User create', error: res.errors });
+      nameListService.saveUser(newUser)
+        .then((result: any) => {
+          if (result.errors) {
+            res.json({ info: 'error during User create', error: result.errors });
           }
-          res.json({ info: 'User saved successfully', data: newUser });
-      });
+          res.json({ info: 'User saved successfully', data: result });
+        });
     });
 }
