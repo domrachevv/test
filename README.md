@@ -8,7 +8,7 @@
 This is a MEAN project for Angular 2 apps based on [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/mgechev/angular2-seed-express).
 Include:
  
-- Full include from [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/mgechev/angular2-seed-express).
+- Full include from [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/vyakymenko/angular2-seed-express).
 - [Express](https://expressjs.com/) Express Node.js server for production/development build API.
 - [MongoDB](https://www.mongodb.com/) MongoDB full integration with configurable connection parameters.
 - [PM2](http://pm2.keymetrics.io/) daemon for a server running.
@@ -78,7 +78,7 @@ $ node app.server.dev.js
 
 # Daemonize Server
 
-For daemonize your server I propose to uze `PM2`.
+For daemonize your server I propose to use `PM2`.
 ```sh
 # before daemonize production server `npm run build.prod`
 $ pm2 start app.server.prod.js

@@ -5,6 +5,8 @@ import { NameListService } from '../server/services/name.list';
 import { User, IUserModel } from '../server/db/entity/user';
 var dbURI    = 'mongodb://localhost/mongotest';
 var mongoose = require('mongoose');
+//to avoid mongoose deprecation warning
+mongoose.Promise = global.Promise;
 let nameData = require('../server/data/name.list.json');
 
 function createUser(value: string) {
