@@ -28,7 +28,7 @@ describe('Mongoose ', function () {
         mongoose.connection.close(done);
     });
 
-    it("check user list is empty", function(done: MochaDone) {
+    it("check user list is defined", function(done: MochaDone) {
         nameListService.getAllUsers().then((res: IUserModel[]) => {
             expect(res.length).to.not.be.undefined;
             done();
