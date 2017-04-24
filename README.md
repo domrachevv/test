@@ -259,7 +259,7 @@ $ node app.server.dev.js --mongo_connection=[target mongo connection]
 
 or by setting MONGO_CONNECTION environment variable. The priority is
 
-command line parameter > environment variable > default connection
+`command line parameter > environment variable > default connection`
 
 # Karma test configuration
 If you want to reconfigure Karma check karma.conf.js file.
