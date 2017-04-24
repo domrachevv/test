@@ -3,7 +3,7 @@
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-This is a MEAN project for Angular 2 apps based on [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/mgechev/angular2-seed-express).
+This is a skeleton project for MEAN apps based on [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/vyakymenko/angular2-seed-express).
 Include:
  
 - Full include from [Valentyn Yakymenko's](https://github.com/vyakymenko) [angular2-seed-express](https://github.com/vyakymenko/angular2-seed-express).
